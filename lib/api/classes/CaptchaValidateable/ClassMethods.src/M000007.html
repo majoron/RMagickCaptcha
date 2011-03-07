@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>draw_text (CaptchaValidateable::ClassMethods)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File captcha_validateable.rb, line 82</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draw_text</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">gc</span>)
+      <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">push</span>
+      <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">stroke_width</span>=<span class="ruby-value">2</span>
+      <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">stroke</span>(<span class="ruby-identifier">random_color</span>())
+      <span class="ruby-comment cmt"># gc.font_family=&quot;times&quot;</span>
+      <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">font_family</span>=<span class="ruby-value str">&quot;verdana&quot;</span>
+      <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">font_stretch</span> = <span class="ruby-constant">Magick</span><span class="ruby-operator">::</span><span class="ruby-constant">UltraExpandedStretch</span>
+      <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">font_style</span> = <span class="ruby-constant">Magick</span><span class="ruby-operator">::</span><span class="ruby-constant">NormalStyle</span>
+      <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">font_weight</span> = <span class="ruby-constant">Magick</span><span class="ruby-operator">::</span><span class="ruby-constant">NormalWeight</span>
+      <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">gravity</span> = <span class="ruby-constant">Magick</span><span class="ruby-operator">::</span><span class="ruby-constant">WestGravity</span>
+      <span class="ruby-identifier">idx</span> = <span class="ruby-value">25</span>
+      <span class="ruby-identifier">text</span>.<span class="ruby-identifier">each_char</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">sym</span> <span class="ruby-operator">|</span>
+        <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">skewx</span>( <span class="ruby-identifier">random_mod</span>( <span class="ruby-identifier">rand</span>(<span class="ruby-value">7</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span> ) )
+        <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">skewy</span>( <span class="ruby-identifier">random_mod</span>( <span class="ruby-identifier">rand</span>(<span class="ruby-value">5</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span> ) )
+        <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">pointsize</span>=<span class="ruby-identifier">rand</span>(<span class="ruby-value">10</span>)<span class="ruby-operator">+</span><span class="ruby-value">30</span>
+        <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">fill</span>(<span class="ruby-identifier">random_color</span>())
+        <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">text</span>(<span class="ruby-identifier">idx</span>,<span class="ruby-value">0</span>,<span class="ruby-identifier">sym</span>)
+        <span class="ruby-identifier">idx</span><span class="ruby-operator">+=</span><span class="ruby-value">25</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">pop</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
