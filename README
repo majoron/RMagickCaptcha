@@ -1,8 +1,8 @@
 RMagickCaptcha
 ===================
 
-RMagickCaptcha is a gem that help to implement captcha at Ruby application. The
-gem provide functionality to create at catptcha image and validate it.
+RMagickCaptcha is a gem that implements captcha for using in Rails application.
+The gem provides functionality to create a captcha image and validate user's input.
 
 * The gem allows multiple captchas at the same page
 * The gem allows ...
@@ -69,9 +69,9 @@ In your views:
       <%= render :partial => "section2" %>
       <ul>
         <li>
-      <%= image_tag "/captcha", :alt => "captcha", :title => "captcha" %>
-      <%= f.text_field :captcha_text, :maxlength => 16%>
-        <%= f.error_message_on :captcha_text %>
+          <%= image_tag "/captcha", :alt => "captcha", :title => "captcha" %>
+          <%= f.text_field :captcha_text, :maxlength => 16%>
+          <%= f.error_message_on :captcha_text %>
         </li>
       </ul>
       <%= f.submit button_label, :class => 'blue-button'  %>
@@ -86,9 +86,7 @@ In your routes.rb:
 Installation
 =======
 
-* Type 'gem install -r rmagick_captcha' with root account if you have installed RubyGems.
-* Or type 'ruby setup.rb' with root account if you can be root account.
-* Or copy lib/abstract.rb into proper directory such as '/usr/local/lib/ruby/site_ruby'.
+* Type 'gem install --local rmagick_captcha' with root account if you have installed RubyGems.
 
 
 Example
@@ -103,6 +101,8 @@ TODO
 * Metaprogram def captcha
 * Write generator to supply captcha_controller(?)
 * Add tests
+* Add backend with a predefined images (and sound?)
+* Add visual effects (3d, grey and etc)
 
 
-Copyright (c) 2009 arufanov, released under the MIT license
+Copyright (c) 2011 arufanov, released under the MIT license.
