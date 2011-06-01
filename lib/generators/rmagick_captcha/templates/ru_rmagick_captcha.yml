@@ -1,0 +1,19 @@
+en:
+  activeview:
+    columns:
+      address_type:
+        name: "Name"
+        code: "Code"
+        about: "About"
+        enabled: "Enabled"
+        created_at: "Created"
+    flashes:
+      address_type:
+        notices:
+          created: "An address type was successfully created."
+          updated: "Address type was successfully updated."
+          deleted: "Address type was successfully deleted."
+    messages:
+       address_type:
+        new: "Create new address type"
+        edit: "Editing address type"

@@ -1,104 +1,46 @@
-# Include gems
-require "rubygems"
-# TODO: check
-# require "RMagick"
+# Include
+require 'rubygems'
+require 'active_support'
+require 'rmagick_captcha/model_additions'
+require 'rmagick_captcha/controller_additions'
+require 'rmagick_captcha/view_additions'
+# require backends
+require 'rmagick_captcha/rmagick_backend'
 
-# todo: place srand() during plugin startup
+# = Rails breadcrumbs
+#
+module RmagickCaptcha
+  # ::Rails.logger.error("...")
 
-# CaptchaValidateable
-module RMagickCaptcha
-  @@gc_width = 200
-  mattr_accessor :gc_width
+  # default options that can be overridden on the global level
+  @@options = {
+    :controller         => "rmagick_captcha",                           #
+    :action             => "show",                                      #
+    :id                 => "id",                                        #
+    :captcha_key_len    => 4,                                           #
+    :case_sensitive     => true,                                           #
+    :random_chars       => "ABCDEFGHJKLMNPQRSTUVWXYZ" + "0123456789",   #
+    :random_colors      => ["red", "blue", "green", "gray", "pink"],    #
+    :img_format         => "png",                                       #
+    :gc_width           => 200,                                         #
+    :gc_height          => 100,                                         #
+  }
+  mattr_reader :options
 
-  @@gc_height = 100
-  mattr_accessor :gc_height
-
-  @@img_format = "png"
-  mattr_accessor :img_format
-
-  @@random_chars = "ABCDEFGHJKLMNPQRSTUVWXYZ" + "0123456789"
-  mattr_accessor :random_chars
-
-  @@random_colors = ["red", "blue", "green", "gray", "pink"]
-  mattr_accessor :random_colors
-
-
-  def self.included(target)
-    target.extend(ClassMethods)
+  def self.enable_activerecord
+    ActiveRecord::Base.send :include, RmagickCaptcha::ModelAdditions
+    ActiveRecord::Base.send :extend, RmagickCaptcha::ModelAdditions::ClassMethods
   end
 
-  module ClassMethods
-    def get_random_string (len = 10)
-      result = ""
-      len.times do
-        result << CaptchaValidateable.random_chars[rand(CaptchaValidateable.random_chars.size)]
-      end
-      result
-    end
-
-    def get_captcha_key (len = 5)
-      result = ""
-      len.times do
-        result << CaptchaValidateable.random_chars[rand(CaptchaValidateable.random_chars.size)]
-      end
-      result
-    end
-
-    def get_captcha_image (key)
-      canvas = Magick::Image.new(CaptchaValidateable.gc_width, CaptchaValidateable.gc_height,
-        Magick::HatchFill.new('white','lightcyan2'))
-
-      gc = Magick::Draw.new
-      draw_text(key, gc)
-
-      gc.push
-      gc.fill('blue')
-      gc.fill_opacity(0.3)
-      gc.bezier(0,CaptchaValidateable.gc_height,rand(40),rand(30),rand(CaptchaValidateable.gc_width),
-                1,CaptchaValidateable.gc_width,CaptchaValidateable.gc_height)
-      gc.pop
-
-      gc.push
-      gc.fill('green')
-      gc.fill_opacity(0.4)
-      gc.bezier(0,0,rand(10),rand(40)+20,rand(40)+20,rand(40)+20,CaptchaValidateable.gc_width,0)
-      gc.pop
-
-      gc.draw(canvas)
-
-      canvas.format= CaptchaValidateable.img_format
-      return canvas.to_blob()
-
-    end
-
-    def random_mod(val)
-      return (rand(50) > 25 ? 1:-1)*val
-    end
-
-    def random_color()
-      return CaptchaValidateable.random_colors[rand(CaptchaValidateable.random_colors.size())]
-    end
-
-    def draw_text(text, gc)
-      gc.push
-      gc.stroke_width=2
-      gc.stroke(random_color())
-      # gc.font_family="times"
-      gc.font_family="verdana"
-      gc.font_stretch = Magick::UltraExpandedStretch
-      gc.font_style = Magick::NormalStyle
-      gc.font_weight = Magick::NormalWeight
-      gc.gravity = Magick::WestGravity
-      idx = 25
-      text.each_char do | sym |
-        gc.skewx( random_mod( rand(7) + 1 ) )
-        gc.skewy( random_mod( rand(5) + 1 ) )
-        gc.pointsize=rand(10)+30
-        gc.fill(random_color())
-        gc.text(idx,0,sym)
-        idx+=25
-      end
-      gc.pop
-    end
+  def self.enable_actionpack
+    ActionController::Base.send :include, RmagickCaptcha::ControllerAdditions
+    ActionController::Base.send :extend, RmagickCaptcha::ControllerAdditions::ClassMethods
+    ActionView::Base.send :include, RmagickCaptcha::ViewAdditions
   end
+
+end
+
+if defined? Rails
+  RmagickCaptcha.enable_activerecord if defined? ActiveRecord
+  RmagickCaptcha.enable_actionpack if defined? ActionController
 end
