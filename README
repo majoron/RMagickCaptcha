@@ -14,7 +14,7 @@ Quick Start
 =======
 In your Gemfile:
 
-  gem "rmagick_captcha", ">= 0.6.0"
+  gem "rmagick_captcha", ">= 0.6.1"
 
 
 In your model:

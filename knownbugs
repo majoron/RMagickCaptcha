@@ -12,6 +12,10 @@ For example bug: "1.0 { Feature Request } [ AntHill ] / 380 / STLport support re
 that bug was created for 1.0 version of the AntHill component, bug is feature request with
 380 number at bug tracking system. And bug requires STLPort support implementation.
 
+ Version 0.6
+ -----------
+0.5 { Bug Report } [ RMagickCaptcha ] / X / There isn't known bugs
+
  Version 0.5
  -----------
 0.5 { Bug Report } [ RMagickCaptcha ] / X / There isn't known bugs

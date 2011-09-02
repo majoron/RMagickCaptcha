@@ -7,9 +7,10 @@ module RmagickCaptcha
       def download_rmagick_catcha(*symbols)
        symbols.each do |sym|
          define_method("#{sym}") do
+           key = session[params[:id]]
            # Get current captcha key and send back
-           send_data(::RmagickCaptcha::RmagickBackend.get_captcha_image(session[params[:id]]),
-            :filename => "captcha.png", :type => "image/png", :disposition => 'inline')
+           image = key.nil? ? "" : ::RmagickCaptcha::RmagickBackend.get_captcha_image(key)
+           send_data(image, :filename => "captcha.png", :type => "image/png", :disposition => 'inline')
          end
         end
       end
