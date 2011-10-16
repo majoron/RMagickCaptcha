@@ -39,8 +39,7 @@ module RmagickCaptcha
       gc.push
       gc.stroke_width=2
       gc.stroke(random_color(options))
-      # gc.font_family="times"
-      gc.font_family="verdana"
+      gc.font_family= options[:font_family]
       gc.font_stretch = Magick::UltraExpandedStretch
       gc.font_style = Magick::NormalStyle
       gc.font_weight = Magick::NormalWeight

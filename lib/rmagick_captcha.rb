@@ -18,12 +18,13 @@ module RmagickCaptcha
     :action             => "show",                                      #
     :id                 => "id",                                        #
     :captcha_key_len    => 4,                                           #
-    :case_sensitive     => true,                                           #
+    :case_sensitive     => true,                                        #
     :random_chars       => "ABCDEFGHJKLMNPQRSTUVWXYZ" + "0123456789",   #
     :random_colors      => ["red", "blue", "green", "gray", "pink"],    #
     :img_format         => "png",                                       #
     :gc_width           => 200,                                         #
     :gc_height          => 100,                                         #
+    :font_family        => "times",                                     #
   }
   mattr_reader :options
 

@@ -14,6 +14,7 @@ that bug was created for 1.0 version of the AntHill component, bug is feature re
 
  Version 0.6
  -----------
+0.6 { Bug Report } [ RMagickCaptcha ] / X / Add font family as configuration option
 0.6 { Bug Report } [ RMagickCaptcha ] / X / Send empty image if captcha key is not inside session
 
  Version 0.5
