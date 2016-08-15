@@ -1,7 +1,7 @@
 require 'date'
 Gem::Specification.new do |s|
   s.name = %q{rmagick_captcha}
-  s.version = "0.6.2"
+  s.version = "0.6.3"
   s.date = Date.today.to_s
   s.summary = %q{RMagickCaptcha is a gem that implements captcha for using in Rails application.}
   s.description = %q{RMagickCaptcha is a gem that implements captcha for using in Rails application.}
