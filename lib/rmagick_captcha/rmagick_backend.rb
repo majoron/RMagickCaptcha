@@ -1,4 +1,5 @@
-require 'RMagick'
+require 'rmagick'
+require 'RMagick' unless defined?(Magick)
 
 module RmagickCaptcha
   module RmagickBackend
